@@ -1,0 +1,211 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+}
+:root {
+  --iconClr: white;
+  --textClr: white;
+  --ScrollBarBg: #b2b6b726;
+  --scrollBarTxt: rgba(0, 0, 0, 0.762);
+  --appbg: #2564ebde;
+  --appbgLinear: linear-gradient(to right, #2564ebb6, #133d98d0, #0cb4c3d0);
+}
+
+/* navbar local css  */
+.navbar {
+  background: #2564ebde !important;
+  margin-bottom: 10px;
+}
+.container-fluid1 {
+  /* background: rgba(255, 0, 0, 0.908); */
+  height: 50px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-self: start;
+}
+.header {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  font-size: 35px;
+  color: var(--iconClr);
+  font-weight: bolder;
+}
+
+/* side menu css */
+
+/* side menu container */
+.sideMenuCont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+
+  z-index: -100;
+  /* display: none; */
+}
+.side-menu {
+  height: calc(100vh - 67px);
+
+  position: fixed;
+  top: 67px;
+  right: 0;
+  background: #2564ebce;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+
+  z-index: 1000;
+}
+.side-menu ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.side-menu ul {
+  /* background: red; */
+  max-height: 90%;
+  height: fit-content;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: row; */
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.side-menu ul::-webkit-scrollbar {
+  width: 0px;
+}
+
+.side-menu ul li {
+  list-style: none;
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+  padding-left: 10px;
+  color: var(--textClr);
+}
+
+/* css hover ul li in side menu */
+.side-menu ul li:hover {
+  background: var(--ScrollBarBg);
+  /* color: rgba(9, 205, 140, 0.907); */
+}
+
+i {
+  font-size: 18px;
+  color: var(--iconClr);
+}
+
+#SideMenu {
+  width: 250px;
+  transform: translateX(250px);
+  transition: all 0.5s ease;
+}
+
+.bgFade {
+  background: rgba(89, 87, 87, 0.375);
+  z-index: 999;
+  transition: all 0.5s ease;
+}
+
+/* scroll bar below  header*/
+.navScrollBar {
+  width: 100vw;
+  height: 35px;
+  /* padding: 0 10px; */
+  /* background: var(--ScrollBarBg); */
+  /* background: red; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  box-shadow: 2px 0px 10px var(--ScrollBarBg);
+}
+
+.navScrollBar ul::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+.navScrollBar ul {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 95%;
+  overflow-x: auto;
+  /* background: red; */
+}
+.navScrollBar ul li {
+  list-style: none;
+  margin-right: 10px;
+  font-size: 14px;
+  color: var(--scrollBarTxt);
+  white-space: nowrap;
+  cursor: pointer;
+  background: whitesmoke;
+  padding: 0 5px;
+  border-radius: 5px;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.navScrollBar ul li:hover {
+  background: #2564ebde;
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-evenly; */
+  gap: 5px;
+}
+
+/* toast message box */
+.toastD {
+  position: fixed;
+  bottom: 20px;
+  right: 5px;
+  min-height: 50px;
+  width: 80%;
+  max-width: 350px;
+  background: var(--appbgLinear);
+  color: white;
+  border-radius: 4px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 1px 3px black;
+  font-weight: bolder;
+}
+
+.boxToastBgWarning {
+  background: linear-gradient(
+    to right,
+    rgba(186, 123, 7, 0.896),
+    rgba(207, 104, 6, 0.912),
+    rgba(5, 201, 71, 0.852)
+  ) !important;
+}

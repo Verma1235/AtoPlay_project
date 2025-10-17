@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)file:///D:/other%20project/TechQV_Ai/TechQv.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Voice Assistant with Typing Effect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="./Voice Assistant with Typing Effect_files/bootstrap-icons.min.css">
+    <link href="./Voice Assistant with Typing Effect_files/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Voice Assistant with Typing Effect_files/all.min.css">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            background-color: #000000;
+            background: url('https://www.kr38r.com/wp-content/uploads/2023/10/kr38r-voice-ai.gif'), #000000;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            filter: blur(0.2px);
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        .user-msg {
+            text-align: right;
+            color: #4da3ff;
+        }
+
+        .assistant-msg {
+            text-align: left;
+            color: #ffffff;
+            white-space: pre-wrap;
+        }
+
+        .input-group input {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border: 1px solid #444;
+        }
+
+        .input-group input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-secondary {
+            border-color: #555;
+            color: #cccccc;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        #ask_btn {
+            height: 50px;
+            width: 50px;
+
+            /* margin-left: 10px; */
+            font-size: 25px;
+            color: #ec9639;
+            background: linear-gradient(145deg, #030a22, #340115);
+            /* border: none; */
+            /* box-shadow: 1px 1px 5px #d66407, -1px -1px 5px #bfe404; */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #04642e;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- local code -->
+        <!-- <div id="container">
+            <img src="https://www.kr38r.com/wp-content/uploads/2023/10/kr38r-voice-ai.gif" alt="Nova GIF" width="300">
+            <h1><b style="color:#ec9639">Welcome</b> to <b
+                    style="color:#cd089c;filter:drop-shadow(1px 2px 1px white);">TechQv</b>, Your AI Assistant</h1>
+
+        </div> -->
+        <!-- Ai code -->
+        <h2 class="mb-4 text-center" style="font-family:&#39;Gill Sans&#39;, &#39;Gill Sans MT&#39;, Calibri, &#39;Trebuchet MS&#39;, sans-serif;">AI <strong style="color: rgb(24, 175, 152);font-family:Arial, Helvetica, sans-serif;"><b style="color: rgb(34, 159, 6);">T</b>echQv</strong> Assistant</h2>
+
+        <div class="chat-box" id="chatBox">
+            <!-- Chat messages will be added here -->
+        <div class="message user-msg">can you able to open youtubemusic</div><div class="message assistant-msg">okay!!, Now i am trying to open youtubemusic.</div></div>
+
+        <div class="input-group mb-3">
+            <input type="text" id="userInput" class="form-control" placeholder="Type your question...">
+            <button id="ask_btn" class="btn btn-outline-secondary" onclick="submitText()"><i class="bi bi-alexa"></i>
+            </button>
+            <button class="btn btn-outline-secondary" onclick="startVoiceInput()">
+                <i class="fas fa-microphone"></i>
+            </button>
+        </div>
+    </div>
+    <div class="footer">
+        All rights reserved © 2025 !! Develop by Dinesh Verma !!
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="./Voice Assistant with Typing Effect_files/bootstrap.bundle.min.js.download"></script>
+
+    <script>
+        // speak text by Ai
+
+        function txtTovoice(msg) {
+            window.speechSynthesis.cancel();
+            let ass = new SpeechSynthesisUtterance();
+            ass.lang = "hi-IN";
+            ass.text = msg;
+            ass.volume = 1;
+            ass.rate = 1;
+            ass.pitch = 1;
+            const voices = window.speechSynthesis.getVoices();
+            ass.voice = voices.find(voice => voice.name.includes("female")) || voices[0];
+            window.speechSynthesis.speak(ass);
+        }
+
+        // Handle appending a user's question
+        function appendUserMessage(message) {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            // messageDiv.style.background="";
+            // messageDiv.style.width=
+            messageDiv.className = 'message user-msg';
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Typing effect for assistant's answer
+        function typeAssistantMessage(message, spk = true, spkExtra = '') {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant-msg';
+            chatBox.appendChild(messageDiv);
+            if (spk) {
+                txtTovoice(message);
+            } else if (!spk) {
+                txtTovoice(spkExtra);
+            }
+
+
+            let i = 0;
+            function type() {
+                if (i < message.length) {
+                    messageDiv.textContent += message.charAt(i);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                    i++;
+                    setTimeout(type, 40); // Typing speed
+                }
+            }
+
+            type();
+        }
+
+
+
+
+        // Start voice input using Web Speech API
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Sorry, your browser doesn't support speech recognition.");
+                return;
+            }
+
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'hi-IN';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function (event) {
+                const voiceText = event.results[0][0].transcript;
+                document.getElementById('userInput').value = voiceText;
+                submitText();
+            };
+
+            recognition.onerror = function (event) {
+                console.error('Speech recognition error:', event.error);
+            };
+
+            recognition.start();
+        }
+
+        document.getElementById('userInput').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                submitText(); // call your function to handle question submission
+            }
+        });
+
+
+
+        // Ai feed data 
+
+        function AI(question) {
+            const input = question.toLowerCase().trim();
+
+            if (input.includes("how are you") || input.includes("kon ho")) {
+                return "I'm just a Ai assistant develop by Dinesh Verma Sir, but I'm functioning perfectly. Thanks for asking!";
+            } else if (input.includes("what's up") || input.includes("what is up")) {
+                return "Not much, just hanging around in the cloud!";
+            } else if (input.includes("tell me something") || input.includes("interesting fact")) {
+                return "Did you know? Honey never spoils. Archaeologists have found 3000-year-old honey in Egyptian tombs that is still edible!";
+            } else if (input.includes("who are you") || input.includes("what are you")) {
+                return "I'm your TechQv AI assistant—here to help, chat, and make your life a bit easier!";
+            } else if (input.includes("what can you do") || input.includes('you do')) {
+                return "I can answer your questions, provide info, help with tasks, or just have a chat.";
+            } else if (input.includes("are you real")) {
+                return "I exist in code—so yes, but not in the way humans do!";
+            } else if (input.includes("tell me a joke") || input.includes('joke')) {
+                return "Why don’t skeletons fight each other? They don’t have the guts.";
+            } else if (input.includes("father") || input.includes("your developer") || (input.includes("develop") && input.includes("by") || (input.includes("your")) && input.includes("develop") && input.includes("name")) || input.includes("your god")) {
+                return "I am developed by Dinesh Verma Sir !!";
+            } else if (input.includes("your name") || input.includes("my name") || input.includes("tera naam")) {
+                return "I'm!  Your Ai assistant 'TechQv' ";
+
+            } else if (input.includes("hi") || input.includes("hii") || input.includes("hello") || input.includes("hey")) {
+                return "Hello! How can I assist you today?";
+            } else if (input.includes("time")) {
+                // return `${time()} `;
+                typeAssistantMessage(`The current Time`);
+                return time();
+
+
+            } else if (input.includes('frd') || input.includes('dinesh friend') || input.includes('friend') || input.includes("dinesh's friend") || input.includes('dinesh ka dost') || (input.includes('dost') && input.includes('dinesh'))) {
+                return `Aditya is not just a friend — he's Dinesh Sir's best friend. And trust me, you don't want to mess with the kind of power that friendship holds!`;
+
+            } else if (input.includes("date")) {
+                return `Today's date is ${date()} `;
+
+            } else if (input.includes('dost')) {
+                return `Ji!! Kese ho dost! or kiya help chahte ho, please told me !`;
+
+            } else if (input.includes('help')) {
+                return `you can ask me to open any website or to clear screen, date, time joke`;
+
+            } else if (input.includes("ok")) {
+                return `okay All right`;
+            }
+
+
+            else if (input.includes("brother") || input.includes("dinesh's brother") || input.includes("dinesh ka bhai")) {
+                return "Deepak kumar verma is the Brother of Dinesh Sir !!";
+
+            } else if (input.includes("clear screen") || input.includes('clr') || input.includes('clear')) {
+                document.getElementById('chatBox').innerHTML = "";
+                return `Your screen has been cleaned now, right?`;
+
+            } else {
+                return "Sorry!! I have no Idea about it, because !! Dinesh sir don't allow me to answer this question, Please Ask another question."; // Not a general thought—can send to real AI backend
+            }
+        }
+
+
+        // Submit typed question
+        function submitText() {
+            const input = document.getElementById('userInput');
+            const question = input.value.trim();
+            if (!question) return;
+
+            appendUserMessage(question);
+            input.value = '';
+
+            // Simulate assistant response (replace this with real API call if needed)
+            // const simulatedAnswer = "Sure! Here's the answer to your question: \"" + question + "\".";
+            const input2 = question.toLowerCase().trim();
+
+            if (input2.includes('open')) {
+                getUrlName(question);
+
+            } else {
+                const simulatedAnswer = AI(question);
+                typeAssistantMessage(simulatedAnswer);
+
+            }
+        }
+        function getUrlName(que) {
+            let query = que.toLowerCase().trim().split(" ");
+            let flag = false;
+            for (let i = 0; i < query.length; i++) {
+                if (query[i] == 'open') {
+                    flag = true;
+                } else if (flag == true) {
+
+                    typeAssistantMessage(`okay!!, Now i am trying to open ${query[i]}.`);
+                    setTimeout(() => {
+                        uri(query[i]);
+                    }, 3000);
+                    flag = false;
+                    break;
+                }
+            }
+        }
+
+        function uri(urlname) {
+            try {
+                window.open(`https://www.${urlname}.com`, '_blank');
+            }
+            catch (err) {
+                try {
+                    window.open(`https://www.${urlname}.in`, '_blank');
+                } catch (err2) {
+                    typeAssistantMessage(`Sorry!! I have no permission to open ${urlname}, may be ${urlname} not exist!!`);
+                }
+            }
+
+        }
+
+
+        function time() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // If hour is 0, set it to 12
+
+            // Add leading zero to minutes if needed
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+            return `${hours}:${formattedMinutes} ${ampm}`;
+            // return currentTime;
+        }
+
+        function date() {
+            const date = new Date();
+            const formattedDate = date.toLocaleDateString('en-GB', { // Example: DD/MM/YYYY
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            return formattedDate;
+        }
+
+
+        // Disable right-click
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            // Disable F12
+            if (e.key === "F12") {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === "I") {
+                e.preventDefault();
+            }
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === "u") {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.key === "J") {
+                e.preventDefault();
+            }
+        });
+
+        (function () {
+            const devtools = /./;
+            devtools.toString = function () {
+                console.warn("Developer tools are open!");
+                alert("Please close developer tools to continue.");
+            };
+            console.log(devtools);
+        })();
+
+
+
+
+    </script>
+
+
+</body></html>

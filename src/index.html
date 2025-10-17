@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/rootCssWithLib.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- navbar header of app -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid1">
+            <div class="header">
+                <a class="navbar-brand" href="index.html">
+                    <img src="resources/logo_w.svg" alt="" width="80" height="100%">
+                </a>
+                <span class="menu" id="SideMenuToggleBtn">
+                    <i class="bi bi-list icon"></i>
+                </span>
+            </div>
+
+        </div>
+    </nav>
+    <!-- nav bar end -->
+
+
+    <!-- screen blur during side menu toggle or any others popup -->
+    <div class="sideMenuCont" id="SideMenuBgScreen">
+
+    </div>
+
+
+    <!-- side menu -->
+    <div class="side-menu" id="SideMenu">
+        <ul>
+            <li id="HomeBtn"><i class="bi bi-house-door"></i><a href="#">Home</a></li>
+            <li id="AboutBtn"><i class="bi bi-file-person"></i><a href="#">About Us</a></li>
+            <li><i class="bi bi-gear-wide-connected"></i><a href="#">Settings</a></li>
+            <li><i class="bi bi-box-arrow-in-right"></i><a href="#" class="btn" data-bs-toggle="modal"
+                    data-bs-target="#Acct-Login">Login / Signup</a></li>
+            <li><i class="bi bi-telephone"></i><a href="#">Contact</a></li>
+            <li id="HelpsBtn"><i class="bi bi-info-circle"></i><a href="#">Helps</a></li>
+        </ul>
+    </div>
+
+    <!-- side menu end -->
+
+    <div class="navScrollBar">
+        <ul>
+            <li>Musics</li>
+            <li>Entertainment</li>
+            <li>Cartoon</li>
+            <li>Songs</li>
+            <li>Games</li>
+            <li>Vlogs</li>
+            <li>Eductaion</li>
+            <li>Movies</li>
+            <li>Dance</li>
+            <li>news</li>
+            <!-- extra -->
+            <li>Songs</li>
+            <li>Games</li>
+            <li>Vlogs</li>
+            <li>Eductaion</li>
+            <li>Movies</li>
+            <li>Dance</li>
+            <li>news</li>
+        </ul>
+
+    </div>
+
+    <!-- main screen works starts here -->
+    <div class="container-fluid" id="main">
+
+    </div>
+
+
+
+
+
+
+    <!-- Button trigger modal -->
+
+    <!--login Modal -->
+    <div class="modal fade" id="Acct-Login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginlable"> Login into Your Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="Enter your email id..">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="Enter correct password..">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                            <!-- <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
+                            <div id="emailHelp" class="form-text">Create a new Account. <b
+                                    style="color: rgb(9, 134, 134);font-size: 18px;cursor: pointer;"
+                                    data-bs-toggle="modal" data-bs-target="#Acct-Signup"
+                                    data-bs-dismiss="modal">Signup</b> </div>
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-box-arrow-in-right"
+                                style="margin-right: 5px;"></i> Login</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--SignUp Modal -->
+    <div class="modal fade" id="Acct-Signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginlable"> Signup new Account </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name..">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" placeholder="Enter your phone number..">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelp"
+                                placeholder="Enter your email id..">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Enter correct password..">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="confirm correct password..">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                            <!-- <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
+                            <div id="emailHelp" class="form-text">Already have an account. <b
+                                    style="color: rgb(9, 134, 134);font-size: 18px;cursor: pointer;"
+                                    data-bs-toggle="modal" data-bs-target="#Acct-Login"
+                                    data-bs-dismiss="modal">Login</b> </div>
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-box-arrow-in-right"
+                                style="margin-right: 5px;"></i> Signup </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- toast message box -->
+    <div class="toastD" id="ToastD">
+        Lorem, ipsum dolor.
+
+    </div>
+
+    <!-- toast message box end -->
+
+    <script src="js\jquery.js"></script>
+    <script src="js\common.js"></script>
+    <script src="js\mainScreenManager.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
